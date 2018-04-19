@@ -1,19 +1,27 @@
-class Drone {
-  constructor (id, name) {
-    this._id = id;
+class Vehicle {
+  start() {
+    console.log('starting Vehicle')
   }
-
-  get id() {
-    console.log('in id getter')
-    return this._id + ' TEMPORARY';
-  }
-
-  set id(value) {
-    this._id = value;
+  static getCompanyName () {
+    console.log('My getCompanyName')
   }
 }
 
-let drone = new Drone('A123')
-drone.id = 'B456'
-console.log('drone id ' + drone.id)
+class Car extends Vehicle {
+  start() {
+    super.start()
+    console.log('starting car')
+  }
+  static getCompanyName () {
+    super.getCompanyName()
+    console.log('My other one')
+  }
+}
+
+let c = new Car()
+c.start()
+
+Car.getCompanyName()
+
+
 
