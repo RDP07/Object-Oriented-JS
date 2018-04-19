@@ -9,6 +9,24 @@ export class FleetDataService {
     this.errors = []
   }
 
+  getCarByLicense(license) {
+    return this.cars.find(function (car) {
+      return car.license === license
+    })
+  }
+
+  getCarsSortedByLicense() {
+    return this.cars.sort(function(car1, car2) {
+      if (car1.license < car2.license) {
+        return -1
+      }
+      if (car1.license > car2.license) {
+        return 1
+      }
+      return 0
+    })
+  }
+
   loadData(fleet) {
     for (let data of fleet) {
       switch(data.type) {

@@ -6,7 +6,9 @@ import { FleetDataService } from './services/fleet-data-service.js'
 let dataService = new FleetDataService()
 dataService.loadData(fleet)
 
-for (let e of dataService.errors)
-  console.log(e.message)
+let car = dataService.getCarByLicense('RT9000')
+console.log(car)
 
-
+let cars = dataService.getCarsSortedByLicense();
+for (let car of cars)
+  console.log(car.license)
