@@ -3,16 +3,24 @@ import { Car } from './classes/car.js'
 import { Drone } from './classes/drone.js'
 import { fleet } from './fleet-data.js'
 import { FleetDataService } from './services/fleet-data-service.js'
-import { Button } from './ui/button.js'
-import { Image } from './ui/image.js'
-import { TitleBar } from './ui/title-bar.js'
-import { DataTable } from './ui/data-table.js'
-import { GoogleMap } from './ui/google-map.js'
+import { AppBase } from './framework/app-base.js'
+import { HomePage } from './pages/home.js'
+import { CarsPage } from './pages/cars.js'
+import { DronesPage } from './pages/drones.js'
+import { MapPage } from './pages/map.js'
 
-let dataService = new FleetDataService()
-dataService.loadData(fleet)
+export class App extends AppBase {
+  constructor() {
+    super('Fleet Manager')
+    this.dataService = new FleetDataService()
+    this.dataService.loadData(fleet)
 
-let centerOfMap = { lat: 40.783661, lng: -73.965883 }
-let map = new GoogleMap(centerOfMap, dataService.cars, dataService.drones)
+    this.addRoute('Home', new HomePage(), true)
+    this.addRoute('Cars', new CarsPage())
+    this.addRoute('Drones', new DronesPage())
+    this.addRoute('Map', new MapPage())
+  }
+}
 
-map.appendToElement($('body'))
+export let application = new App()
+application.show($('body'))

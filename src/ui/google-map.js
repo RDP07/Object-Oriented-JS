@@ -32,6 +32,6 @@ export class GoogleMap extends BaseElement {
   }
 
   getElementString() {
-    return `<div style="width: 800px; height: 400px;" id="map"></div>`
+    return `<div style="max-width: 800px; height: 400px;" id="map"></div>`
   }
 }
