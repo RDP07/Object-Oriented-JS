@@ -1,19 +1,18 @@
+import $ from 'jquery'
 import { Car } from './classes/car.js'
 import { Drone } from './classes/drone.js'
 import { fleet } from './fleet-data.js'
 import { FleetDataService } from './services/fleet-data-service.js'
+import { Button } from './ui/button.js'
+import { Image } from './ui/image.js'
+import { TitleBar } from './ui/title-bar.js'
+import { DataTable } from './ui/data-table.js'
+import { GoogleMap } from './ui/google-map.js'
 
 let dataService = new FleetDataService()
 dataService.loadData(fleet)
 
-// let car = dataService.getCarByLicense('RT9000')
-// console.log(car)
+let centerOfMap = { lat: 40.783661, lng: -73.965883 }
+let map = new GoogleMap(centerOfMap, dataService.cars, dataService.drones)
 
-// let cars = dataService.getCarsSortedByLicense();
-// for (let car of cars)
-//   console.log(car.license)
-
-let cars = dataService.filterCarsByMake('e')
-
-for (let car of cars)
-  console.log(car.make)
+map.appendToElement($('body'))
